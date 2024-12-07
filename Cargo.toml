@@ -1,0 +1,72 @@
+[package]
+name = "sotc"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Connectivity
+tokio = { version = "1.0", features = ["full"] }
+axum = { version = "0.7", features = ["macros"] }
+tower-http = { version =  "0.6", features = ["auth", "validate-request"] }
+reqwest = { version = "0.11", default-features = false, features = [
+    "rustls-tls",
+    "json",
+    "stream",
+] }
+warp = "0.3"
+async-trait = "0.1"
+futures = "0.3"
+
+# Logging, Tracing and Metrics
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+prometheus = "0.13"
+
+# Error Handling
+thiserror = "2"
+anyhow = "1"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1"
+humantime-serde = "1"
+bincode = "1"
+
+# CLI
+argh = "0.1"
+
+# SQL and ORMs
+sea-orm = { version = "1", features = [
+    "macros",
+    "sqlx-postgres",
+    "runtime-tokio-rustls",
+] }
+sea-query = "0.32"
+sqlx = { version = "0.8", features = [ "sqlite", "runtime-tokio" ] }
+
+# Vectors, Arrays, ML
+ndarray = "0.16"
+nalgebra = "0.33"
+half = "2"
+
+# Misc: (Non Cryptographic) Hashing, Allocators, UUIDs, Date and Time, Image Processing
+rustc-hash = "2"
+sha1_smol = "1"
+tikv-jemallocator = "0.6"
+uuid = { version = "1", features = [
+    "v4",
+    "fast-rng",
+    "macro-diagnostics",
+] }
+chrono = { version = "0.4", features = ["serde"] }
+derivative = "2"
+image = { version = "0.25", features = ["jpeg", "png", "tiff"] }
+
+[dev-dependencies]
+rstest = "0.23"
+criterion = { version = "0.5", features = ["html_reports"] }
+approx = "0.5"
+
+[[bench]]
+name = "benchmark"
+harness = false
